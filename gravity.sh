@@ -400,7 +400,6 @@ gravity_DownloadBlocklists() {
     echo -e "${OVER}  ${CROSS} ${str}"
     echo -e "  ${INFO} No source list found, or it is empty"
     echo ""
-    return 1
   fi
 
   local url domain agent cmd_ext str target compression
@@ -437,6 +436,10 @@ gravity_DownloadBlocklists() {
     url="${sources[$i]}"
     domain="${sourceDomains[$i]}"
     id="${sourceIDs[$i]}"
+
+    if [[ -z "$url" ]]; then
+      continue
+    fi
 
     # Save the file as list.#.domain
     saveLocation="${piholeDir}/list.${id}.${domain}.${domainsExtension}"
