@@ -393,24 +393,29 @@ gravity_DownloadBlocklists() {
   )"
 
   local str="Pulling blocklist source list into range"
+  echo "ok1"
 
   if [[ -n "${sources[*]}" ]] && [[ -n "${sourceDomains[*]}" ]]; then
     echo -e "${OVER}  ${TICK} ${str}"
   else
     echo -e "${OVER}  ${CROSS} ${str}"
     echo -e "  ${INFO} No source list found, or it is empty"
+    echo "ok2"
     echo ""
   fi
 
+  echo "ok3"
   local url domain agent cmd_ext str target compression
   echo ""
 
   # Prepare new gravity database
+  echo "ok4"
   str="Preparing new gravity database"
   echo -ne "  ${INFO} ${str}..."
   rm "${gravityTEMPfile}" > /dev/null 2>&1
   output=$( { sqlite3 "${gravityTEMPfile}" < "${gravityDBschema}"; } 2>&1 )
   status="$?"
+  echo "ok5"
 
   if [[ "${status}" -ne 0 ]]; then
     echo -e "\\n  ${CROSS} Unable to create new database ${gravityTEMPfile}\\n  ${output}"
