@@ -437,6 +437,11 @@ gravity_DownloadBlocklists() {
     domain="${sourceDomains[$i]}"
     id="${sourceIDs[$i]}"
 
+    if [[ -z "$url" ]]; then
+      continue
+    fi
+    echo "not skipping url: $url !!"
+
     # Save the file as list.#.domain
     saveLocation="${piholeDir}/list.${id}.${domain}.${domainsExtension}"
     activeDomains[$i]="${saveLocation}"
